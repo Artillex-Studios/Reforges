@@ -121,26 +121,26 @@ private class ActivatorSlot(
                 targets.getRandomReforge(disallowed = disallowed)
             }
 
-            if (reforge == null) {
+            if (reforge == null || !usedStone) {
                 return@onLeftClick
             }
 
             val price = menu.reforgeStatus[player].price
 
-            if (!price.canAfford(player)) {
-                player.sendMessage(
-                    plugin.langYml.getMessage("cannot-afford-price").replace("%price%", price.getDisplay(player))
-                )
+            // if (!price.canAfford(player)) {
+            //     player.sendMessage(
+                    //         plugin.langYml.getMessage("cannot-afford-price").replace("%price%", price.getDisplay(player))
+                            //     )
+                //
+            //     if (plugin.configYml.getBool("gui.cannot-afford-sound.enabled")) {
+                    //         PlayableSound.create(
+                        //             plugin.configYml.getSubsection("gui.cannot-afford-sound")
+                                //         )?.playTo(player)
+                    //     }
+            //     return@onLeftClick
+            // }
 
-                if (plugin.configYml.getBool("gui.cannot-afford-sound.enabled")) {
-                    PlayableSound.create(
-                        plugin.configYml.getSubsection("gui.cannot-afford-sound")
-                    )?.playTo(player)
-                }
-                return@onLeftClick
-            }
-
-            price.pay(player)
+            // price.pay(player)
 
             player.sendMessage(plugin.langYml.getMessage("applied-reforge").replace("%reforge%", reforge.name))
 
