@@ -1,22 +1,25 @@
 name: ${pluginName}
 version: ${version}
 main: com.willfp.reforges.ReforgesPlugin
-api-version: 1.17
-authors: [ Auxilor ]
-website: willfp.com
-depend:
-  - eco
-softdepend:
-  - libreforge
-  - Talismans
+api-version: 1.19
 
-commands:
-  reforges:
-    description: Base Command
-    permission: reforges.command.reforges
-  reforge:
-    description: Open reforge menu
-    permission: reforges.command.reforge
+dependencies:
+  - name: eco
+    required: true
+    bootstrap: false
+
+  - name: libreforge
+    required: false
+    bootstrap: false
+
+  - name: Talismans
+    required: false
+    bootstrap: false
+
+load-after:
+  - name: eco
+    bootstrap: false
+
 
 permissions:
   reforges.*:

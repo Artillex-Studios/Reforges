@@ -23,6 +23,7 @@ import com.willfp.eco.core.sound.PlayableSound
 import com.willfp.ecomponent.CaptiveItem
 import com.willfp.ecomponent.menuStateVar
 import com.willfp.ecomponent.setSlot
+import com.willfp.libreforge.LibreforgeSpigotPlugin
 import com.willfp.reforges.reforges.PriceMultipliers
 import com.willfp.reforges.reforges.PriceMultipliers.reforgePriceMultiplier
 import com.willfp.reforges.reforges.Reforge
@@ -127,20 +128,22 @@ private class ActivatorSlot(
 
             val price = menu.reforgeStatus[player].price
 
-//             if (!price.canAfford(player)) {
-//                 player.sendMessage(
-//                             plugin.langYml.getMessage("cannot-afford-price").replace("%price%", price.getDisplay(player))
-//                                 )
+//            if (!price.canAfford(player)) {
+//                player.sendMessage(
+//                    // Not clean but hey ho
+//                    EcoPlugin.getPlugin(LibreforgeSpigotPlugin::class.java)
+//                        .langYml.getMessage("cannot-afford-price").replace("%price%", price.getDisplay(player))
+//                )
 //
-//                 if (plugin.configYml.getBool("gui.cannot-afford-sound.enabled")) {
-//                             PlayableSound.create(
-//                                     plugin.configYml.getSubsection("gui.cannot-afford-sound")
-//                                         )?.playTo(player)
-//                         }
-//                 return@onLeftClick
-//             }
-//
-//             price.pay(player)
+//                if (plugin.configYml.getBool("gui.cannot-afford-sound.enabled")) {
+//                    PlayableSound.create(
+//                        plugin.configYml.getSubsection("gui.cannot-afford-sound")
+//                    )?.playTo(player)
+//                }
+//                return@onLeftClick
+//            }
+
+            price.pay(player)
 
             player.sendMessage(plugin.langYml.getMessage("applied-reforge").replace("%reforge%", reforge.name))
 
