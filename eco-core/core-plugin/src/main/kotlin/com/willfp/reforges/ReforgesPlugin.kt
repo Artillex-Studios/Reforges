@@ -11,6 +11,7 @@ import com.willfp.libreforge.registerHolderProvider
 import com.willfp.libreforge.registerPlayerRefreshFunction
 import com.willfp.reforges.commands.CommandReforge
 import com.willfp.reforges.commands.CommandReforges
+import com.willfp.reforges.commands.UnReforgeCommand
 import com.willfp.reforges.config.TargetYml
 import com.willfp.reforges.display.ReforgesDisplay
 import com.willfp.reforges.integrations.talismans.TalismansIntegration
@@ -55,7 +56,8 @@ class ReforgesPlugin : LibreforgePlugin() {
     override fun loadPluginCommands(): List<PluginCommand> {
         return listOf(
             CommandReforge(this),
-            CommandReforges(this)
+            CommandReforges(this),
+            UnReforgeCommand(this)
         )
     }
 

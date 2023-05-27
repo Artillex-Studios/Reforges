@@ -14,6 +14,10 @@ messages:
   invalid-reforge: "&cInvalid reforge!"
   needs-reforge: "&cYou must specify a reforge"
 
+unreforge-gui:
+  title: "Reforge Item"
+  close: "&cClose"
+
 menu:
   title: "Reforge Item"
   close: "&cClose"

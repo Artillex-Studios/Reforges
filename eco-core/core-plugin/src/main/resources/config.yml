@@ -18,6 +18,46 @@ price-multipliers:
     multiplier: 0.7
     priority: 2
 
+unreforge-gui:
+  rows: 6
+
+  mask:
+    # The way the mask works is by having a list of materials
+    # And then a pattern to use those materials.
+
+    # The pattern is the rows in the GUI
+    # Each line must be 9 long, and the amount of rows should be the amount of rows in the GUI
+    # A zero represents nothing
+    # A 1 represents the first material
+    # A 2 represents the second material
+    # And so on, you can add up to 9.
+
+    materials:
+      - black_stained_glass_pane
+      - magenta_stained_glass_pane
+    pattern:
+      - "011111110"
+      - "012202210"
+      - "012111210"
+      - "010111010"
+      - "011111110"
+      - "011101110"
+
+  item-slot:
+    row: 4
+    column: 3
+
+  accept-slot:
+    row: 1
+    column: 3
+    material: stone
+
+  close:
+    material: barrier
+    location:
+      row: 6
+      column: 5
+
 gui:
   rows: 6
 
