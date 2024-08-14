@@ -3,6 +3,7 @@ package com.willfp.reforges
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.display.DisplayModule
 import com.willfp.eco.core.items.Items
+import com.willfp.eco.core.items.tag.CustomItemTag
 import com.willfp.libreforge.conditions.Conditions
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
@@ -12,13 +13,23 @@ import com.willfp.reforges.commands.CommandReforges
 import com.willfp.reforges.commands.UnReforgeCommand
 import com.willfp.reforges.config.TargetYml
 import com.willfp.reforges.display.ReforgesDisplay
+import com.willfp.reforges.gui.ReforgeGUI
 import com.willfp.reforges.libreforge.ConditionHasReforge
+import com.willfp.reforges.reforges.PriceMultipliers
 import com.willfp.reforges.reforges.ReforgeFinder
+import com.willfp.reforges.reforges.ReforgeStoneTag
+import com.willfp.reforges.reforges.ReforgeTargets
+import com.willfp.reforges.reforges.ReforgedTag
 import com.willfp.reforges.reforges.Reforges
 import com.willfp.reforges.reforges.util.ReforgeArgParser
 import com.willfp.reforges.util.AntiPlaceListener
 import com.willfp.reforges.util.DiscoverRecipeListener
+import com.willfp.reforges.util.reforge
+import com.willfp.reforges.util.reforgeStone
+import com.willfp.talismans.talismans.Talismans
+import com.willfp.talismans.talismans.util.TalismanChecks
 import org.bukkit.event.Listener
+import org.bukkit.inventory.ItemStack
 
 class ReforgesPlugin : LibreforgePlugin() {
     val targetYml: TargetYml =
@@ -39,7 +50,16 @@ class ReforgesPlugin : LibreforgePlugin() {
 
         Items.registerArgParser(ReforgeArgParser)
 
+        Items.registerTag(ReforgedTag(this))
+        Items.registerTag(ReforgeStoneTag(this))
+
         registerHolderProvider(ReforgeFinder.toHolderProvider())
+    }
+
+    override fun handleReload() {
+        ReforgeTargets.update(this)
+        PriceMultipliers.update(this)
+        ReforgeGUI.update(this)
     }
 
     override fun loadListeners(): List<Listener> {
@@ -57,8 +77,10 @@ class ReforgesPlugin : LibreforgePlugin() {
         )
     }
 
-    override fun createDisplayModule(): DisplayModule {
-        return ReforgesDisplay(this)
+    override fun loadDisplayModules(): List<DisplayModule> {
+        return listOf(
+            ReforgesDisplay(this)
+        )
     }
 
     companion object {
